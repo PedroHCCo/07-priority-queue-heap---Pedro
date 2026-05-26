@@ -1,5 +1,6 @@
 package heap;
 
+import entidades.Paciente;
 import java.util.ArrayList;
 
 /**
