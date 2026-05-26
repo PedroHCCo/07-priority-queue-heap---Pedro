@@ -1,4 +1,4 @@
-package estatica;
+package entidades;
 
 /**
  * Representa um paciente que chegou no pronto-socorro.
