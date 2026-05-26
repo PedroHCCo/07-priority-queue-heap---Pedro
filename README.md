@@ -1,21 +1,15 @@
-# Fila de Prioridade Heap
+# Sistema de Triagem - Hospital São Binário
 
-## Compilar
+Implementação de uma Fila de Prioridade utilizando a estrutura de dados Heap Binário, desenvolvida para o processo de triagem de pacientes.
 
-```bash
-javac -d out src/entidades/Pessoa.java src/estatica/FilaEstatica.java src/estatica/FilaComPrioridade.java src/heap/FilaComPrioridadeHeap.java src/Main.java
-```
+## Requisitos
+- Java JDK 17+
+- A prioridade é definida por: Nível de Urgência > Tempo de Espera > Grupo Vulnerável.
 
-## Executar
+## Como compilar e executar
+1. Abra o terminal na pasta do projeto.
+2. Compile os arquivos: `javac *.java`
+3. Execute o programa: `java Main`
 
-```bash
-java -cp out Main
-```
-
-## Gerar Javadoc
-
-```bash
-javadoc -d doc -sourcepath src -subpackages estatica:heap:entidades
-```
-
-Abrir a documentação: `doc/index.html`
+## Javadoc
+A documentação do projeto é gerada automaticamente pelo GitHub Actions e publicada no GitHub Pages.
