@@ -1,43 +1,31 @@
-import java.util.PriorityQueue;
-import java.util.Queue;
-
-import entidades.Pessoa;
-import estatica.FilaComPrioridade;
-
 public class Main {
-    public static void main(String args[]){
-        System.out.println("--- Fila de Inteiros ---");
+    public static void main(String[] args) {
+        FilaPrioridadeHeap fila = new FilaPrioridadeHeap();
 
-        FilaComPrioridade<Integer> fila = new FilaComPrioridade<>(10);
+        Paciente[] pacientes = {
+            new Paciente("Carlos", 1, 45, false),
+            new Paciente("Maria", 5, 5, false),
+            new Paciente("João", 3, 20, false),
+            new Paciente("Beatriz", 3, 35, true),
+            new Paciente("Pedro", 5, 2, false),
+            new Paciente("Helena", 2, 45, true)
+        };
 
-        fila.enfileirar(1);
-        fila.enfileirar(3);
-        fila.enfileirar(2);
-
-        System.out.println(fila);
-
-        System.out.println("\n--- Fila de Pessoas ---");
-
-        FilaComPrioridade<Pessoa> filaPessoas = new FilaComPrioridade<>(10);
-
-        filaPessoas.enfileirar(new Pessoa("Adão", 1));
-        filaPessoas.enfileirar(new Pessoa("Carlos", 3));
-        filaPessoas.enfileirar(new Pessoa("Bruno", 2));
-
-        while (!filaPessoas.estaVazia()) {
-            System.out.println(filaPessoas.desenfileirar());
+        System.out.println("--- REGISTRANDO PACIENTES ---");
+        for (Paciente p : pacientes) {
+            System.out.println("Chegou: " + p.getNome());
+            fila.enfileirar(p);
+            System.out.print("Estado do Heap: ");
+            fila.imprimirEstado();
+            System.out.println("-");
         }
 
-        System.out.println("\n--- Fila de Pessoas (PriorityQueue) ---");
-
-        Queue<Pessoa> filaPessoasJava = new PriorityQueue<>(10);
-
-        filaPessoasJava.add(new Pessoa("Adão", 1));
-        filaPessoasJava.add(new Pessoa("Carlos", 3));
-        filaPessoasJava.add(new Pessoa("Bruno", 2));
-
-        while (!filaPessoasJava.isEmpty()) {
-            System.out.println(filaPessoasJava.poll());
+        System.out.println("\n--- ATENDIMENTO (ORDEM DE PRIORIDADE) ---");
+        int ordem = 1;
+        while (!fila.estaVazia()) {
+            Paciente atendido = fila.desenfileirar();
+            System.out.println(ordem + ". " + atendido.getNome());
+            ordem++;
         }
     }
 }
