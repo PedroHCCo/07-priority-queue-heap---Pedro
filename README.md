@@ -12,4 +12,4 @@ Implementação de uma Fila de Prioridade utilizando a estrutura de dados Heap B
 3. Execute o programa: `java Main`
 
 ## Javadoc
-A documentação do projeto é gerada automaticamente pelo GitHub Actions e publicada no GitHub Pages.
+A documentação do projeto é gerada automaticamente pelo GitHub Actions e publicada no GitHub Pages. 
