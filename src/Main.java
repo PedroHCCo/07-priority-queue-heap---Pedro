@@ -1,4 +1,3 @@
-package estatica;
 
 /**
  * Classe principal pra testar o funcionamento do heap com os pacientes do roteiro
