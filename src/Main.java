@@ -1,8 +1,13 @@
 package estatica;
+
+/**
+ * Classe principal pra testar o funcionamento do heap com os pacientes do roteiro
+ */
 public class Main {
     public static void main(String[] args) {
         FilaPrioridadeHeap fila = new FilaPrioridadeHeap();
 
+        // Criando o pessoal do teste
         Paciente[] pacientes = {
             new Paciente("Carlos", 1, 45, false),
             new Paciente("Maria", 5, 5, false),
