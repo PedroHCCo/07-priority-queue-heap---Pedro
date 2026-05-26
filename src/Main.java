@@ -1,4 +1,5 @@
-
+import entidades.Paciente;
+import heap.FilaPrioridadeHeap;
 /**
  * Classe principal pra testar o funcionamento do heap com os pacientes do roteiro
  */
