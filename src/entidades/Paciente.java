@@ -1,4 +1,10 @@
 package estatica;
+
+/**
+ * Representa um paciente que chegou no pronto-socorro.
+ * A classe implementa Comparable pra gente conseguir definir quem tem
+ * mais prioridade na fila com base nas regras do hospital.
+ */
 public class Paciente implements Comparable<Paciente> {
     private String nome;
     private int nivelUrgencia;
@@ -16,17 +22,19 @@ public class Paciente implements Comparable<Paciente> {
         return nome;
     }
 
+    /**
+     * Compara esse paciente com outro pra saber quem deve ser atendido antes.
+     * O desempate segue a ordem: nivel de urgencia, depois o tempo de espera,
+     * e por ultimo se e do grupo vulneravel.
+     */
     @Override
     public int compareTo(Paciente outro) {
-        // 1. Nível de urgência
         if (this.nivelUrgencia != outro.nivelUrgencia) {
             return Integer.compare(this.nivelUrgencia, outro.nivelUrgencia);
         }
-        // 2. Tempo de espera
         if (this.tempoEsperaMinutos != outro.tempoEsperaMinutos) {
             return Integer.compare(this.tempoEsperaMinutos, outro.tempoEsperaMinutos);
         }
-        // 3. Grupo vulnerável (true é "maior" que false)
         return Boolean.compare(this.grupoVulneravel, outro.grupoVulneravel);
     }
 
