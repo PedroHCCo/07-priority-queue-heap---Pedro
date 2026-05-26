@@ -1,78 +1,45 @@
 package estatica;
 
-import java.util.ArrayList;
+/**
+ * Representa um paciente que chegou no pronto-socorro.
+ * A classe implementa Comparable pra gente conseguir definir quem tem
+ * mais prioridade na fila com base nas regras do hospital.
+ */
+public class Paciente implements Comparable<Paciente> {
+    private String nome;
+    private int nivelUrgencia;
+    private int tempoEsperaMinutos;
+    private boolean grupoVulneravel;
 
-public class FilaPrioridadeHeap {
-    private ArrayList<Paciente> heap;
-
-    public FilaPrioridadeHeap() {
-        this.heap = new ArrayList<>();
+    public Paciente(String nome, int nivelUrgencia, int tempoEsperaMinutos, boolean grupoVulneravel) {
+        this.nome = nome;
+        this.nivelUrgencia = nivelUrgencia;
+        this.tempoEsperaMinutos = tempoEsperaMinutos;
+        this.grupoVulneravel = grupoVulneravel;
     }
 
-    public void enfileirar(Paciente paciente) {
-        heap.add(paciente);
-        sobeHeap(heap.size() - 1);
+    public String getNome() {
+        return nome;
     }
 
-    public Paciente desenfileirar() {
-        if (heap.isEmpty()) {
-            return null;
+    /**
+     * Compara esse paciente com outro pra saber quem deve ser atendido antes.
+     * O desempate segue a ordem: nivel de urgencia, depois o tempo de espera,
+     * e por ultimo se e do grupo vulneravel.
+     */
+    @Override
+    public int compareTo(Paciente outro) {
+        if (this.nivelUrgencia != outro.nivelUrgencia) {
+            return Integer.compare(this.nivelUrgencia, outro.nivelUrgencia);
         }
-        
-        Paciente removido = heap.get(0);
-        Paciente ultimo = heap.remove(heap.size() - 1);
-        
-        if (!heap.isEmpty()) {
-            heap.set(0, ultimo);
-            desceHeap(0);
+        if (this.tempoEsperaMinutos != outro.tempoEsperaMinutos) {
+            return Integer.compare(this.tempoEsperaMinutos, outro.tempoEsperaMinutos);
         }
-        return removido;
+        return Boolean.compare(this.grupoVulneravel, outro.grupoVulneravel);
     }
 
-    private void sobeHeap(int indice) {
-        int pai = (indice - 1) / 2;
-        
-        while (indice > 0 && heap.get(indice).compareTo(heap.get(pai)) > 0) {
-            trocar(indice, pai);
-            indice = pai;
-            pai = (indice - 1) / 2;
-        }
-    }
-
-    private void desceHeap(int indice) {
-        int tamanho = heap.size();
-        
-        while (true) {
-            int maior = indice;
-            int esquerda = 2 * indice + 1;
-            int direita = 2 * indice + 2;
-
-            if (esquerda < tamanho && heap.get(esquerda).compareTo(heap.get(maior)) > 0) {
-                maior = esquerda;
-            }
-            if (direita < tamanho && heap.get(direita).compareTo(heap.get(maior)) > 0) {
-                maior = direita;
-            }
-            if (maior != indice) {
-                trocar(indice, maior);
-                indice = maior;
-            } else {
-                break;
-            }
-        }
-    }
-
-    private void trocar(int i, int j) {
-        Paciente temp = heap.get(i);
-        heap.set(i, heap.get(j));
-        heap.set(j, temp);
-    }
-
-    public void imprimirEstado() {
-        System.out.println(heap.toString());
-    }
-
-    public boolean estaVazia() {
-        return heap.isEmpty();
+    @Override
+    public String toString() {
+        return nome + "(U:" + nivelUrgencia + ", T:" + tempoEsperaMinutos + "m, V:" + grupoVulneravel + ")";
     }
 }
